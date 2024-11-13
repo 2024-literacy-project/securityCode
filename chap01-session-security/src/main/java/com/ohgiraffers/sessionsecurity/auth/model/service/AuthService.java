@@ -18,6 +18,7 @@ public class AuthService implements UserDetailsService {
     private UserService userService;
 
 
+    // 여기도 마찬가지로 로그인을 수행하는 핵심 로직이다. username 이 이름 같지만, 실제로는 id 이다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
