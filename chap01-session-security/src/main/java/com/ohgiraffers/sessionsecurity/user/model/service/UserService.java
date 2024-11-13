@@ -34,6 +34,7 @@ public class UserService {
         return result;
     }
 
+    // AuthService 에서 호출하는 메소드
     public LoginUserDTO findByUsername(String username) {
 
         LoginUserDTO login = userMapper.findByUsername(username);
