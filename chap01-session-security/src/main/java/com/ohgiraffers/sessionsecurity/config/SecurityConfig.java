@@ -52,13 +52,17 @@ public class SecurityConfig {
             login.usernameParameter("user");
             // form 태그의 pass 입력하는 name 속성을 입력하는 공간
             login.passwordParameter("pass");
+            // 로그인 성공 했을 때 어디로 가는 지 URL 입력하는 공간
             login.defaultSuccessUrl("/", true);
+            // 로그인 실패 했을 때 수행 할 작업 AuthFailHanldler 클래스로 이동
             login.failureHandler(authFailHandler);
 
         }).logout(logout -> {
+            // 로그아웃 기능 작성하는 URL
             logout.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"));
             logout.deleteCookies("JSESSIONID");
             logout.invalidateHttpSession(true);
+            // 로그아웃 성공했을 때 이동 할 경로
             logout.logoutSuccessUrl("/");
 
         }).sessionManagement(session -> {
