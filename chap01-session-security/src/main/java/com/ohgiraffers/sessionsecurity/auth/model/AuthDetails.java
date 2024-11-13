@@ -32,7 +32,7 @@ public class AuthDetails implements UserDetails {
     * */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
+        // 컬렉션 타입 > 역할을 여러 개 설정 가능 다중권한 처리 가능, 굳이 필요 없음
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         loginUserDTO.getRole().forEach(role -> authorities.add(() -> role));
 
@@ -52,6 +52,7 @@ public class AuthDetails implements UserDetails {
     * 사용자의 아이디를 반환하는 메서드이다.
     * UsernamePasswordAuthenticationToken과 사용자의 아이디를 비교할 때 사용된다.
     * */
+    // 이 메소드가 제일 중요. getUsername > 딱 보면 이름을 가져오는 것 같지만 id 를 가져온다.
     @Override
     public String getUsername() {
         return loginUserDTO.getUserName();
