@@ -36,13 +36,19 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> {
+            // 해당하는 URL 은 로그인(인증이 되지 않은 사람도 들어갈 수 있다.)
             auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/", "/main").permitAll();
+            // 해당하는 URL 은 권한이 ADMIN 인 사람만 들어갈 수 있다.
             auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
+            // 해당하는 URL 은 권한이 USER 인 사람만 들어갈 수 있다.
             auth.requestMatchers("/user/*").hasAnyAuthority(UserRole.USER.getRole());
+            // 위에 작성하지 않은 URL 은 로그인(인증이 필요하다.) > 로그인페이지로 이동 됨.
             auth.anyRequest().authenticated();
 
         }).formLogin(login -> {
+            // 실제로 로그인 기능을 만든 URL 기술
             login.loginPage("/auth/login");
+            // form 태그의 id 를 입력하는 공간
             login.usernameParameter("user");
             login.passwordParameter("pass");
             login.defaultSuccessUrl("/", true);
