@@ -29,6 +29,9 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         // ignore ? 무시하다.
+        // 부트스트랩 템플릿을 사용하게 되면 css, js, asset 등등 폴더가 엄청 많음
+        // 하지만 view 페이지에서 css 랑 js 파일 사용하는 것도 일종의 URL 통신
+        // 나중에 css, js, 등등 부트스트랩에서 딸려오는 파일들은 static 폴더에 저장해야 됨.
         return web -> web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
