@@ -48,8 +48,9 @@ public class SecurityConfig {
         }).formLogin(login -> {
             // 실제로 로그인 기능을 만든 URL 기술
             login.loginPage("/auth/login");
-            // form 태그의 id 를 입력하는 공간
+            // form 태그의 id 입력하는 name 속성을 입력하는 공간
             login.usernameParameter("user");
+            // form 태그의 pass 입력하는 name 속성을 입력하는 공간
             login.passwordParameter("pass");
             login.defaultSuccessUrl("/", true);
             login.failureHandler(authFailHandler);
